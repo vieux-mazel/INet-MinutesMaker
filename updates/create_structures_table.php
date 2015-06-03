@@ -17,12 +17,12 @@ class CreateStructuresTable extends Migration
 
 
             //if true any user can create a category in this structure (p.ex for commission/Project)
-            $table->boolean('can_be_populated')->default('false');
+            $table->boolean('can_be_populated')->default(false);
 
-            $table->boolean('project_handler')->default('false');
+            $table->boolean('project_handler')->default(false);
             // main structure categories are avaible in other structure/project to be linked
-            $table->boolean('can_be_linked')->default('true');
-            $table->boolean('is_main')->default('false');
+            $table->boolean('can_be_linked')->default(true);
+            $table->boolean('is_main')->default(false);
 
             $table->string('slug')->index()->unique();
 
@@ -31,7 +31,7 @@ class CreateStructuresTable extends Migration
         });
 
         // Groups and structure link for belongsToMany relation with "Show"
-        Schema::create('vm_minutemaker_structures_groups_show', function($table)
+        Schema::create('vm_minutemaker_struct_perms', function($table)
         {
             $table->integer('group_id')->unsigned();
             $table->integer('structure_id')->unsigned();
@@ -42,7 +42,7 @@ class CreateStructuresTable extends Migration
     public function down()
     {
         Schema::dropIfExists('vm_minutemaker_structures');
-        Schema::dropIfExists('vm_minutemaker_structures_groups_show');
+        Schema::dropIfExists('vm_minutemaker_struct_perms');
     }
 
 }

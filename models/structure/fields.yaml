@@ -12,9 +12,10 @@ fields:
     description:
         label: Description
 
-    categories:
-        label: Categories
-        type: relation
+    #categories:
+    #label: Categories
+    #    type: relation
+
     show:
         label: Droit de lecture
         type: relation

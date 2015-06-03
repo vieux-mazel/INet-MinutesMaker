@@ -1,7 +1,7 @@
 <?php namespace VM\MinuteMaker;
 
 use System\Classes\PluginBase;
-
+use Backend;
 /**
  * MinuteMaker Plugin Information File
  */
@@ -26,9 +26,9 @@ class Plugin extends PluginBase
     public function registerNavigation()
     {
         return [
-            'MinuteMaker' => [
+            'minutemaker' => [
                 'label' => 'MinuteMaker',
-                'url' => Backend::url('vm/minute/structure'),
+                'url' => Backend::url('vm/minutemaker/structure'),
                 'icon' => 'icon-leaf',
                 #'permissions' => ['rainlab.users.*'],
                 'order' => 500,
@@ -37,13 +37,13 @@ class Plugin extends PluginBase
                     'structure' => [
                         'label' => 'Structure',
                         'icon' => 'icon-ticket',
-                        'url' => Backend::url('vm/minute/structure'),
+                        'url' => Backend::url('vm/minutemaker/structure'),
                         #'permissions' => ['rainlab.users.access_users']
                     ],
                     'structurecategory' => [
                         'label' => 'Catégories',
                         'icon' => 'icon-th',
-                        'url' => Backend::url('vm/minute/categories'),
+                        'url' => Backend::url('vm/minutemaker/structurecategory'),
                         #'permissions' => ['rainlab.users.access_users']
                     ]
                 ]

@@ -3,7 +3,8 @@
     - Populate table
     - create_links_table.php
     - create_points_table.php
-    - create_project_containers_table.php
-    - create_project_table.php
-    - create_seance_types_table.php
+    - create_projet_containers_table.php
+    - create_projets_table.php
     - create_seances_table.php
+    - create_structure_categories_table.php
+    - create_structures_table.php

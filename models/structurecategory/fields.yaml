@@ -1,0 +1,18 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    id:
+        label: ID
+        disabled: true
+
+    title:
+        label: Nom
+
+    description:
+        label: Description
+
+    can_hold_project:
+        label: Peut contenir des projets
+        type: checkbox

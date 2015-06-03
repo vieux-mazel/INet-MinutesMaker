@@ -42,7 +42,7 @@ class StructureCategory extends Model
     public $belongsToMany = [
         'projets' => [
             'VM\MinuteMaker\Models\ProjetContainer',
-            'table' => 'vm_minutemaker_structure_categories_projet',
+            'table' => 'vm_minutemaker_cat_projet',
             'key'      => 'category_id',
             'otherKey' => 'projet_id']
     ];

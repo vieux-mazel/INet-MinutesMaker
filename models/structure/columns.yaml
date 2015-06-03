@@ -13,15 +13,15 @@ columns:
     description:
         label: Description
 
-    categories:
-        label: Catégories
-        relation: categories
-        select: title
+    #categories:
+    #    label: Catégories
+    #    relation: categories
+    #    select: @title
 
     show:
         label: Droit de lecture
         relation: show
-        select: name
+        select: (SELECT name FROM vm_minutemaker_struct_perms WHERE group_id = shahiemseymor_roles.id)
 
     #project_handler:
     #can_be_linked:

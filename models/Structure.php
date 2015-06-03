@@ -39,7 +39,7 @@ class Structure extends Model
     public $belongsTo = [];
 
     public $belongsToMany = [
-        'show' => ['ShahiemSeymor\Roles\Models\Groupe', 'table' => 'vm_minutemaker_structures_groups_show']
+        'show' => ['ShahiemSeymor\Roles\Models\Group', 'table' => 'vm_minutemaker_struct_perms']
     ];
 
     public $morphTo = [];
