@@ -34,7 +34,7 @@ class Structure extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'categories' => ['VM\MinuteMaker\Models\StructureCategory'] //relation witrh StructureCategory
+        'categories' => ['VM\MinuteMaker\Models\StructureCategory', ] //relation witrh StructureCategory
     ];
     public $belongsTo = [];
 

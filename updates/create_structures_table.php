@@ -11,7 +11,7 @@ class CreateStructuresTable extends Migration
         Schema::create('vm_minutemaker_structures', function($table)
         {
             $table->engine = 'InnoDB';
-            $table->string('title');
+            $table->string('name');
             $table->string('description');
 
 

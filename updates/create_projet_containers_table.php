@@ -13,7 +13,7 @@ class CreateProjetContainersTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
 
-            $table->string('title');
+            $table->string('name');
             $table->integer('category_id')->unsigned()->index(); //Category is a type of seance (Commission, Project etc.)
 
 

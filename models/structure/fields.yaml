@@ -6,15 +6,15 @@ fields:
     id:
         label: ID
         disabled: true
-    title:
+    name:
         label: Nom
 
     description:
         label: Description
 
-    #categories:
-    #label: Categories
-    #    type: relation
+    categories:
+        label: Categories
+        type: relation
 
     show:
         label: Droit de lecture

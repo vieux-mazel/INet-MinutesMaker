@@ -13,7 +13,7 @@ class CreateStructureCategoriesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->timestamps();
-            $table->string('title');
+            $table->string('name');
             $table->text('description');
             $table->boolean('can_hold_project');
             $table->string('slug')->index()->unique();

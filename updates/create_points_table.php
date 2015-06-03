@@ -13,7 +13,7 @@ class CreatePointsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             // Fields set at creation
-            $table->string('title');
+            $table->string('name');
             $table->integer('order')->unsigned();
             $table->integer('seance_id')->unsigned()->index(); // BelongsTo one Seance
             $table->boolean('is_tracked')->default(false);

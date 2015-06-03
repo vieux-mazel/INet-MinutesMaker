@@ -7,16 +7,15 @@ columns:
         label: ID
         searchable: true
 
-    title:
+    name:
         label: Nom
 
     description:
         label: Description
 
-    #categories:
-    #    label: Catégories
-    #    relation: categories
-    #    select: @title
+    categories:
+        label: Catégories
+        relation: categories
 
     show:
         label: Droit de lecture
