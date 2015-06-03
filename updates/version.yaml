@@ -8,3 +8,6 @@
     - create_seances_table.php
     - create_structure_categories_table.php
     - create_structures_table.php
+1.0.3:
+    - Add Auto database feeding
+    - feed_database.php

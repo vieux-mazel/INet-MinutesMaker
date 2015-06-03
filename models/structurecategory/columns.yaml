@@ -16,3 +16,4 @@ columns:
     structure:
         label: Structure
         relation: structure
+        select: name

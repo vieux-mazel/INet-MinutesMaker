@@ -34,12 +34,17 @@ class Structure extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'categories' => ['VM\MinuteMaker\Models\StructureCategory', ] //relation witrh StructureCategory
+
     ];
     public $belongsTo = [];
 
     public $belongsToMany = [
-        'show' => ['ShahiemSeymor\Roles\Models\Group', 'table' => 'vm_minutemaker_struct_perms']
+        'show' => ['ShahiemSeymor\Roles\Models\Group', 'table' => 'vm_minutemaker_struct_perms'],
+        
+        'categories' => ['VM\MinuteMaker\Models\StructureCategory',
+            'table' => 'vm_minutemaker_struct_cat',
+            'key'      => 'structure_id',
+            'otherKey' => 'category_id'] //relation witrh StructureCategory
     ];
 
     public $morphTo = [];

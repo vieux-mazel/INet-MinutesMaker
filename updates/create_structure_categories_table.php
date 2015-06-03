@@ -26,12 +26,23 @@ class CreateStructureCategoriesTable extends Migration
             $table->integer('projet_id')->unsigned();
             $table->primary(['category_id', 'projet_id']);
         });
+
+        Schema::create('vm_minutemaker_struct_cat', function($table)
+        {
+            $table->integer('category_id')->unsigned();
+            $table->integer('structure_id')->unsigned();
+            $table->primary(['category_id', 'structure_id']);
+        });
+
+
+
     }
 
     public function down()
     {
         Schema::dropIfExists('vm_minutemaker_structure_categories');
         Schema::dropIfExists('vm_minutemaker_cat_projet'); //Join table
+        Schema::dropIfExists('vm_minutemaker_struct_cat'); //Join table
     }
 
 }

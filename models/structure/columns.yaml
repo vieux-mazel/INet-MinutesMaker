@@ -16,12 +16,10 @@ columns:
     categories:
         label: Catégories
         relation: categories
+        select: name
 
     show:
         label: Droit de lecture
         relation: show
-        select: (SELECT name FROM vm_minutemaker_struct_perms WHERE group_id = shahiemseymor_roles.id)
-
-    #project_handler:
-    #can_be_linked:
-    #is_main:
+        select: name 
+        #select: (SELECT name FROM vm_minutemaker_struct_perms WHERE group_id = shahiemseymor_roles.id)
