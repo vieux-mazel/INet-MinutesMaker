@@ -27,9 +27,17 @@ class ProjetContainer extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
+    public $hasMany = [
+        'projet' => ['VM\MinuteMaker\Models\Projet']
+    ];
     public $belongsTo = [];
-    public $belongsToMany = [];
+    public $belongsToMany = [
+        'categories' => [
+            'VM\MinuteMaker\Models\StructureCategory',
+            'table' => 'vm_minutemaker_structure_categories_projet'
+            'key'      => 'projet_id',
+            'otherKey' => 'category_id']
+    ];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];

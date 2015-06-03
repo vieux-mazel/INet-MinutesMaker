@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Structure
+
+# Model Form Field configuration
+form: $/vm/minutemaker/models/structure/fields.yaml
+
+# Model Class name
+modelClass: VM\MinuteMaker\Models\Structure
+
+# Default redirect location
+defaultRedirect: vm/minutemaker/structure
+
+# Create page
+create:
+    title: Créer une structure
+    redirect: vm/minutemaker/structure/update/:id
+    redirectClose: vm/minutemaker/structure
+
+# Update page
+update:
+    title: Éditer une structure
+    redirect: vm/minutemaker/structure
+    redirectClose: vm/minutemaker/structure
+
+# Preview page
+preview:
+    title: Voir la structure

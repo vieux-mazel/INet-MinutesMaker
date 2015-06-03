@@ -28,7 +28,9 @@ class Projet extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'container' => ['VM\MinuteMaker\Models\ProjetContainer']
+    ];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

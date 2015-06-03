@@ -6,3 +6,30 @@ fields:
     id:
         label: ID
         disabled: true
+    title:
+        label: Nom
+
+    description:
+        label: Description
+
+    categories:
+        label: Categories
+        type: relation
+    show:
+        label: Droit de lecture
+        type: relation
+
+    project_handler:
+        label: Projet
+        comment: Peut contenir des projets
+        type: checkbox
+
+    can_be_linked:
+        label: Lien
+        comment: Peut-être lié
+        type: checkbox
+
+    is_main:
+        label: Main
+        comment: Est une structure principale
+        type: checkbox

@@ -39,7 +39,13 @@ class StructureCategory extends Model
     public $belongsTo = [
         'structure' => ['VM\MinuteMaker\Models\Structure'] //relation witrh StructureCategory~Structure => structure_id in db
     ];
-    public $belongsToMany = [];
+    public $belongsToMany = [
+        'projets' => [
+            'VM\MinuteMaker\Models\ProjetContainer',
+            'table' => 'vm_minutemaker_structure_categories_projet',
+            'key'      => 'category_id',
+            'otherKey' => 'projet_id']
+    ];
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];

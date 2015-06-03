@@ -6,3 +6,23 @@ columns:
     id:
         label: ID
         searchable: true
+
+    title:
+        label: Nom
+
+    description:
+        label: Description
+
+    categories:
+        label: Catégories
+        relation: categories
+        select: title
+
+    show:
+        label: Droit de lecture
+        relation: show
+        select: name
+
+    #project_handler:
+    #can_be_linked:
+    #is_main:

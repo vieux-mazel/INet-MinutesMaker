@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Structure Category
+
+# Model Form Field configuration
+form: $/vm/minutemaker/models/structurecategory/fields.yaml
+
+# Model Class name
+modelClass: VM\MinuteMaker\Models\StructureCategory
+
+# Default redirect location
+defaultRedirect: vm/minutemaker/structurecategory
+
+# Create page
+create:
+    title: Create Structure Category
+    redirect: vm/minutemaker/structurecategory/update/:id
+    redirectClose: vm/minutemaker/structurecategory
+
+# Update page
+update:
+    title: Edit Structure Category
+    redirect: vm/minutemaker/structurecategory
+    redirectClose: vm/minutemaker/structurecategory
+
+# Preview page
+preview:
+    title: Preview Structure Category

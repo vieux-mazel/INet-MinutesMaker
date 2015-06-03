@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Seance
+
+# Model Form Field configuration
+form: $/vm/minutemaker/models/seance/fields.yaml
+
+# Model Class name
+modelClass: VM\MinuteMaker\Models\Seance
+
+# Default redirect location
+defaultRedirect: vm/minutemaker/seance
+
+# Create page
+create:
+    title: Create Seance
+    redirect: vm/minutemaker/seance/update/:id
+    redirectClose: vm/minutemaker/seance
+
+# Update page
+update:
+    title: Edit Seance
+    redirect: vm/minutemaker/seance
+    redirectClose: vm/minutemaker/seance
+
+# Preview page
+preview:
+    title: Preview Seance
