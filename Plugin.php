@@ -50,6 +50,19 @@ class Plugin extends PluginBase
             ]
         ];
    }
+   public function registerComponents()
+   {
+       return[
+           'VM\MinuteMaker\Components\DiscussionTracking' => 'BlablaTrack',
+           'VM\MinuteMaker\Components\Projet' => 'projet',
+           'VM\MinuteMaker\Components\ProjetContainer' => 'projetContainer',
+           'VM\MinuteMaker\Components\Seance' => 'seance',
+           'VM\MinuteMaker\Components\StructureCategory' => 'StructureCategory',
+           'VM\MinuteMaker\Components\StructureNamespace' => 'ns',
+           'VM\MinuteMaker\Components\Structure' => 'Structure',
+
+       ];
+   }
 
     //extend Group models to have hasMany Structure and Structure_Category
     //public $belongsToMany = [

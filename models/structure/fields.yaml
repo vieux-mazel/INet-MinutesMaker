@@ -3,34 +3,33 @@
 # ===================================
 
 fields:
+    def_section:
+        label: Nom et description de la structure
+        comment: Une structure est un groupe très global, orienté vers une "permission" vers un groupe de personne. Par exemple "Maîtrise", "PiCos", "Totémisés" etc.
+        type: section
     id:
         label: ID
         disabled: true
+        hidden: true
     name:
         label: Nom
+        span: left
+        comment: Nom de la structure, Par exemple "Maîtrise", "PiCos", "Totémisés" etc.
+
+    slug:
+        label: Url
+        span: right
+        comment: Ne pas mettre de "/" uniquement le nom abrégé p.ex "picos" à la place de "Branche Pionnier et cordées"
 
     description:
         label: Description
 
-    categories:
-        label: Categories
-        type: relation
+    cat_section:
+        label: Permissions
+        type: section
+        comment: Les personnes appartenants aux groupes sélectionnés peuvent voir le contenu de cette structure
 
     show:
         label: Droit de lecture
         type: relation
-
-    project_handler:
-        label: Projet
-        comment: Peut contenir des projets
-        type: checkbox
-
-    can_be_linked:
-        label: Lien
-        comment: Peut-être lié
-        type: checkbox
-
-    is_main:
-        label: Main
-        comment: Est une structure principale
-        type: checkbox
+        span: left

@@ -1,3 +1,8 @@
-<p>This is the default markup for component StructureNamespace</p>
-
-<small>You can delete this file if you want</small>
+{% set ns = __SELF__.ns %}
+<ul>
+    {% for category in ns.categories %}
+        <li>
+            <a href="{{ns.slug}}/{{category.slug}}"> {{category.name}}</a>
+        </li>
+    {% endfor %}
+</ul>

@@ -13,9 +13,11 @@ class CreateProjetContainersTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
 
-            $table->string('name');
+            $table->string('name'); // Childs projects will inherit this property
+            $table->string('description'); // Childs projects will inherit this property
+            $table->dateTime('last_used'); //touch everytimes a new project/seance is added to a project
+            $table->integer('ns_id')->unsigned()->index(); //Category is a type of seance (Commission, Project etc.)
             $table->integer('category_id')->unsigned()->index(); //Category is a type of seance (Commission, Project etc.)
-
 
             $table->timestamps();
         });

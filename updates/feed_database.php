@@ -15,37 +15,60 @@ class SeedAllTables extends Seeder
 
     public function run()
     {
-        $sm = Structure::create([
-            'name' => 'Séance de maîtrise',
+        $ns_sm = Structure::create([
+            'name' => 'Maîtrise',
             'description' => 'Toutes les séances de la maîtrise',
-            ]);
-        $red = Category::create([
-            'name' => 'Rouges',
-            'description' => 'Les séances des Rouges',
-            ]);
-        $orange = Category::create([
-            'name' => 'Ru\'nion',
-            'description' => 'Les séances des Oranges',
-            ]);
-        $b1 = Category::create([
-            'name' => 'Branche Louveteaux et Louvettes',
-            'description' => 'Les séances de la branche Louveteaux et Louvettes',
-            ]);
-        $b2 = Category::create([
-            'name' => 'Branche éclaireuses et éclaireur',
-            'description' => 'Les séances de la Branche éclaireuses et éclaireur',
-            ]);
-        $b3 = Category::create([
-            'name' => 'PiCos',
-            'description' => 'Les séances de maîtrise PiCos',
+            'slug' => 'maitrise',
             ]);
 
+            $b1 = Category::create([
+                'name' => 'Louvettes & Louveteaux',
+                'description' => 'Les séances et projets de la première branche',
+                'slug' => 'loups',
+                'structure' => $ns_sm,
+                ]);
+            $b2 = Category::create([
+                'name' => 'Éclaireuses et éclaireurs',
+                'description' => 'Les séances de la Branche éclaireuses et éclaireur',
+                'slug' => 'eclais',
+                'structure' => $ns_sm,
+                ]);
+            $b3 = Category::create([
+                'name' => 'PiCos',
+                'description' => 'Les séances de maîtrise PiCos',
+                'slug' => 'picos',
+                'structure' => $ns_sm,
+                ]);
+            $orange = Category::create([
+                'name' => 'RU',
+                'description' => 'Les séances des Oranges',
+                'slug' => 'ru',
+                'structure' => $ns_sm,
+                ]);
+            $rouge = Category::create([
+                'name' => 'Rouges',
+                'description' => 'Les séances des rouges',
+                'slug' => 'rouge',
+                'structure' => $ns_sm,
+                ]);
+            $rouge = Category::create([
+                'name' => 'Brigade',
+                'description' => 'Les séances et porjets de la brigade',
+                'slug' => 'brigade',
+                'structure' => $ns_sm,
+                ]);
 
-        $sm->categories()->attach($red);
-        $sm->categories()->attach($orange);
-        $sm->categories()->attach($b1);
-        $sm->categories()->attach($b2);
-        $sm->categories()->attach($b3);
+        $ns_tot = Structure::create([
+            'name' => 'Totémisés',
+            'description' => 'Toutes les projets et documents des totémisés',
+            'slug' => 'totemisation',
+            ]);
+
+        $ns_picos = Structure::create([
+            'name' => 'Picos',
+            'description' => 'Toutes les projets et documents des totémisés',
+            'slug' => 'picos'
+            ]);
     }
 
 }

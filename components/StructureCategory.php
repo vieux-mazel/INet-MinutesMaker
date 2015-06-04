@@ -8,14 +8,27 @@ class StructureCategory extends ComponentBase
     public function componentDetails()
     {
         return [
-            'name'        => 'StructureCategory Component',
-            'description' => 'No description provided yet...'
+            'name'        => 'Structure Category',
+            'description' => 'Affiche une catégorie',
         ];
     }
 
     public function defineProperties()
     {
-        return [];
+        return [
+            'nsslug' => [
+                'title'       => 'Namespace Slug',
+                'description' => 'Slug représentant la structure ciblée',
+                'default'     => '{{ :ns }}',
+                'type'        => 'string',
+            ],
+            'catslug' => [
+                'title'       => 'Category Slug',
+                'description' => 'Slug représentant la catégorie ciblée',
+                'default'     => '{{ :cat }}',
+                'type'        => 'string',
+            ],
+        ];
     }
 
 }

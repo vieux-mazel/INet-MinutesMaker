@@ -3,12 +3,10 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
-        searchable: true
-
     name:
         label: Nom
+    slug:
+        label: Url
 
     description:
         label: Description
@@ -21,5 +19,5 @@ columns:
     show:
         label: Droit de lecture
         relation: show
-        select: name 
+        select: name
         #select: (SELECT name FROM vm_minutemaker_struct_perms WHERE group_id = shahiemseymor_roles.id)

@@ -17,7 +17,8 @@ class CreateSeancesTable extends Migration
             $table->dateTime('date');
             $table->string('slug')->index();
 
-            $table->integer('category_id')->unsigned()->index(); // BelongsTo one Category
+            $table->integer('category_id')->unsigned()->index(); // BelongsTo one Category OR
+            $table->integer('project_id')->unsigned()->index(); // BelongsTo one project
             $table->integer('order')->unsigned();
 
         });

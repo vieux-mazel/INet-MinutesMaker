@@ -38,7 +38,8 @@ class Seance extends Model
         'points' => ['VM\MinuteMaker\Models\Point', 'order' => 'created_at'] //relation with Points
     ];
     public $belongsTo = [
-        'category' => ['VM\MinuteMaker\Models\StructureCategory'] //relation witrh StructureCategory~Seance => category_id in db
+        'category' => ['VM\MinuteMaker\Models\StructureCategory'], //relation witrh StructureCategory~Seance => category_id in db
+        'project' => ['VM\MinuteMaker\Models\Project']
     ];
     public $belongsToMany = [];
     public $morphTo = [];
@@ -52,6 +53,12 @@ class Seance extends Model
         $point->title = $title;
         $point->order = $order;
         $point->save();
+    }
+
+
+    public function notifyUsers(){
+        //Notify Category watchers + Category Nofifier
+        return true;
     }
     /**
      * SCOP FUNCTION

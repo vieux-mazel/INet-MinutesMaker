@@ -3,12 +3,11 @@
 # ===================================
 
 columns:
-    id:
-        label: ID
-        searchable: true
-
     name:
         label: Nom
+
+    slug:
+        label: Url
 
     description:
         label: Description

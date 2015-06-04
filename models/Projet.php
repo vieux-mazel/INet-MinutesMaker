@@ -27,15 +27,31 @@ class Projet extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
-    public $belongsTo = [
-        'container' => ['VM\MinuteMaker\Models\ProjetContainer']
+    public $hasMany = [
+        'seance' => ['VM\MinuteMaker\Models\Seance']
     ];
-    public $belongsToMany = [];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+    public $belongsTo = [
+        'container' => ['VM\MinuteMaker\Models\ProjetContainer'],
+        'leader' => ['RainLab\User\Models\User'],
+        'category' => ['VM\MinuteMaker\Models\StructureCategory']
+
+    ];
+    public $belongsToMany = [
+        'member' => ['RainLab\User\Models\User', //relation witrh StructureCategory~Structure => structure_id in db
+            'table' => 'vm_minutemaker_projet_member',
+            'key'      => 'projet_id',
+            'otherKey' => 'user_id'],
+
+        'bilan' => ['VM\MinuteMaker\Models\Point', // link to bilan
+            'table' => 'vm_minutemaker_projet_bilan',
+            'key'      => 'projet_id',
+            'otherKey' => 'point_id'],
+    ];
+    public function notifyUsers(){
+        //Notify member + leader + Category Watchers
+        return true;
+    }
+
+
 
 }

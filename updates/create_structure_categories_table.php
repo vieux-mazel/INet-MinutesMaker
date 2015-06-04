@@ -15,25 +15,27 @@ class CreateStructureCategoriesTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->text('description');
-            $table->boolean('can_hold_project');
+
+            $table->boolean('can_hold_commission');
+
             $table->string('slug')->index()->unique();
             $table->integer('structure_id')->unsigned()->index(); // BelongsTo one Structure
 
         });
-        Schema::create('vm_minutemaker_cat_projet', function($table)
+
+        Schema::create('vm_minutemaker_cat_notify', function($table)
         {
+            $table->integer('group_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->integer('projet_id')->unsigned();
-            $table->primary(['category_id', 'projet_id']);
+            $table->primary(['group_id', 'category_id']);
         });
 
-        Schema::create('vm_minutemaker_struct_cat', function($table)
+        Schema::create('vm_minutemaker_cat_watcher', function($table)
         {
+            $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned();
-            $table->integer('structure_id')->unsigned();
-            $table->primary(['category_id', 'structure_id']);
+            $table->primary(['user_id', 'category_id']);
         });
-
 
 
     }
@@ -42,7 +44,10 @@ class CreateStructureCategoriesTable extends Migration
     {
         Schema::dropIfExists('vm_minutemaker_structure_categories');
         Schema::dropIfExists('vm_minutemaker_cat_projet'); //Join table
-        Schema::dropIfExists('vm_minutemaker_struct_cat'); //Join table
+        Schema::dropIfExists('vm_minutemaker_cat_notify'); //Join table
+        Schema::dropIfExists('vm_minutemaker_cat_watcher'); //Join table
+
+
     }
 
 }

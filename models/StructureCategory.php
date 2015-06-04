@@ -32,26 +32,35 @@ class StructureCategory extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
+    public $hasOne = [
+        'semestre_handler' => ['VM\MinuteMaker\Models\ProjetContainer'],
+        'projet_handler' => ['VM\MinuteMaker\Models\ProjetContainer'] // Used for longtime project
+    ];
+
     public $hasMany = [
-        'seances' => ['VM\MinuteMaker\Models\StructureCategory'] //relation with Seance
+        //'seances' => ['VM\MinuteMaker\Models\Seance'], //relation with Seance
+        'projets' => ['VM\MinuteMaker\Models\Projet'],
+        'commissions' => ['VM\MinuteMaker\Models\Projet']
     ];
-    public $belongsTo = [];
+    public $belongsTo = [
+        'structure' => ['VM\MinuteMaker\Models\Structure'] //relation with StructureCategory~Structure => structure_id in db
+    ];
+
     public $belongsToMany = [
-        'projets' => [
-            'VM\MinuteMaker\Models\ProjetContainer',
-            'table' => 'vm_minutemaker_cat_projet',
+
+        'notify' => ['RainLab\User\Models\Group',
+            'table' => 'vm_minutemaker_cat_notify',
             'key'      => 'category_id',
-            'otherKey' => 'projet_id'],
-        'structure' => ['VM\MinuteMaker\Models\Structure',
-            'table' => 'vm_minutemaker_struct_cat',
+            'otherKey' => 'group_id'], //relation witrh StructureCategory~Structure => structure_id in db
+
+        'watchers' => ['RainLab\User\Models\User', // Create independant object with polymporph relation
+            'table' => 'vm_minutemaker_cat_watcher',
             'key'      => 'category_id',
-            'otherKey' => 'structure_id'], //relation witrh StructureCategory~Structure => structure_id in db
+            'otherKey' => 'user_id'], //relation witrh StructureCategory~Structure => structure_id in db
     ];
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+    // TODO:
+    //   - Can_see (hasMany users)
+    //   - Manager (hasMany users)
+    //   - Notify (hasMany users)
 
 }

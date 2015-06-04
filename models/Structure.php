@@ -1,7 +1,7 @@
 <?php namespace VM\MinuteMaker\Models;
 
 use Model;
-
+use VM\MinuteMaker\Models\Structure as Struct;
 /**
  * structure Model
  */
@@ -32,25 +32,25 @@ class Structure extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
-    public $hasMany = [
-
-    ];
-    public $belongsTo = [];
 
     public $belongsToMany = [
-        'show' => ['ShahiemSeymor\Roles\Models\Group', 'table' => 'vm_minutemaker_struct_perms'],
-        
-        'categories' => ['VM\MinuteMaker\Models\StructureCategory',
-            'table' => 'vm_minutemaker_struct_cat',
-            'key'      => 'structure_id',
-            'otherKey' => 'category_id'] //relation witrh StructureCategory
+        'show' => ['ShahiemSeymor\Roles\Models\Group',
+            'table' => 'vm_minutemaker_struct_perms',
+            'key' => 'structure_id',
+            'otherKey' => 'group_id']
     ];
 
-    public $morphTo = [];
-    public $morphOne = [];
-    public $morphMany = [];
-    public $attachOne = [];
-    public $attachMany = [];
+    public $hasMany = [
+        'categories' => ['VM\MinuteMaker\Models\StructureCategory']
+    ];
+    public function beforCreate(){
+
+    }
+
+
+    public function getCat(){
+        return $this->categories;
+    }
+
 
 }
