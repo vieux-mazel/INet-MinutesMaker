@@ -27,12 +27,13 @@ class ProjetContainer extends Model
      * @var array Relations
      */
     public $hasMany = [
-        'projet' => ['VM\MinuteMaker\Models\Projet'],
+        'projets' => ['VM\MinuteMaker\Models\Projet', 'key' => 'container_id'],
         'seances' => ['VM\MinuteMaker\Models\Seance']
     ];
-
     public $belongsToMany = [];
     public $belongsTo = [
         'ns' => ['VM\MinuteMaker\Models\Structure'],
-        'category' => ['VM\MinuteMaker\Models\StructureCategory', 'key' => 'category_id']
+        'category' => ['VM\MinuteMaker\Models\StructureCategory', 'key' => 'category_id'],
+        #'active_projet' => ['VM\MinuteMaker\Models\Projet'],
+    ];
 }

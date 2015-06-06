@@ -12,9 +12,15 @@ class CreateProjetsTable extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
+
             $table->dateTime('date');
+            $table->dateTime('start');
+            $table->dateTime('end');
+
+            $table->integer('container_id')->unsigned()->index()->nullable(); //Define the project leader
             $table->integer('leader_id')->unsigned()->index()->nullable(); //Define the project leader
             $table->integer('bilan_id')->unsigned()->index()->nullable(); //Define the attached bilan
+            $table->integer('category_id')->unsigned()->index()->nullable(); //Define the attached bilan
 
             $table->enum('status', ['active', 'upcoming', 'done'])->default('active');
             #$table->enum('type', ['commission', 'projet']);

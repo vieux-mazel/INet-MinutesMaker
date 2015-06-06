@@ -1,125 +1,11 @@
-
-<div class="section">
+{% set ns = __SELF__.ns %}
+{% set cat = __SELF__.cat %}
+{% set semestre = __SELF__.current_sh_projet %}
+{% set gap = __SELF__.gap %}
+<div class="section" id="default_container">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="jumbotron no-padding">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <h1>Gestion semestrielle
-                                <small>
-                                    <br>Janvier-Août 2016</small>
-                            </h1>
-                            <p>{{ns.name}}</p>
-                        </div>
-                        <div class="col-md-2">
-                            <br>
-                            <br>
-                            <div class="btn-group btn-group-lg">
-                                <a class="btn btn-block btn-warning dropdown-toggle" data-toggle="dropdown"><i class="fa fa-flip-vertical fa-lg fa-star text-inverse"></i> Admin <span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu" id="dropdown">
-                                    <li>
-                                        <a href="#"><i class="fa fa-plus fa-fw"></i>Seance</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-plus fa-fw"></i>Tâche</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-edit fa-fw"></i>Team</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-edit fa-fw"></i>Paramêtres</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="col-md-6">
-                        <p class="text-warning">
-                            <small>Prochaine séance: 1er Juillet 2015</small>
-                        </p>
-                    </div>
-                </div>
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">← Semestre précédent</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Semestre prochain →</a>
-                    </li>
-                </ul>
-                <div class="row">
-                <br>
-                    <div class="col-md-4">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    <i class="fa fa-star fa-fw"></i>Les prochaines séances de maîtrise</h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Cras justo odio
-                                        <span class="badge">12 Oct</span>
-                                    </li>
-                                    <li class="list-group-item">Dapibus ac facilisis in
-                                        <span class="badge">18 Nov</span>
-                                    </li>
-                                    <li class="list-group-item">Morbi leo risus
-                                        <span class="badge">16 Déc</span>
-                                    </li>
-                                    <li class="list-group-item">Porta ac consectetur ac
-                                        <span class="badge">22 Déc</span>
-                                    </li>
-                                    <li class="list-group-item">Vestibulum at eros
-                                        <span class="badge">03 Jan</span>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="panel-footer">
-                                <a class="btn btn-block btn-primary">Nouveau</a>
-                            </div>
-                        </div>
-                    </div> <!-- Close col-md-4 -->
-                    <div class="col-md-4">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">
-                                    <i class="fa fa-star fa-fw"></i>Les projets en cours</h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul class="list-group">
-                                    <li class="list-group-item">Cras justo odio</li>
-                                    <li class="list-group-item">Dapibus ac facilisis in</li>
-                                    <li class="list-group-item">Morbi leo risus</li>
-                                    <li class="list-group-item">Porta ac consectetur ac</li>
-                                    <li class="list-group-item">Vestibulum at eros</li>
-                                </ul>
-                            </div>
-                            <div class="panel-footer">
-                                <a class="btn btn-block btn-primary">Nouveau</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Dernières références</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="alert alert-dismissable alert-success">
-                                    <strong>Well done!</strong>You successfully read this important alert message.</div>
-                                <div class="alert alert-dismissable alert-success">
-                                    <strong>Well done!</strong>You successfully read this important alert message.</div>
-                                <div class="alert alert-dismissable alert-success">
-                                    <strong>Well done!</strong>You successfully read this important alert message.</div>
-                                <div class="alert alert-dismissable alert-success">
-                                    <strong>Well done!</strong>You successfully read this important alert message.</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div id="semester_header">
+            {%partial __SELF__ ~ '::semesterheader' __SELF__=__SELF__ semestre=semestre gap=gap ns=ns cat=cat %}
         </div>
         <div class="row">
             <div class="well ">
@@ -145,7 +31,10 @@
         </div>
     </div>
 </div>
-{% for cat in ns.categories %}
 
-{%endfor%}
+{{this.param.ns}}{{this.param.cat}}
 {{dump()}}
+{{dump(ns.url)}}
+{{dump(this.param)}}
+{{gap}}
+{{this.gap}}

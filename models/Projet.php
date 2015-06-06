@@ -13,6 +13,7 @@ class Projet extends Model
      */
     public $table = 'vm_minutemaker_projets';
 
+    protected $dates = array('start','end');
     /**
      * @var array Guarded fields
      */
@@ -31,9 +32,9 @@ class Projet extends Model
         'seance' => ['VM\MinuteMaker\Models\Seance']
     ];
     public $belongsTo = [
-        'container' => ['VM\MinuteMaker\Models\ProjetContainer'],
+        'container' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'container_id'],
         'leader' => ['RainLab\User\Models\User'],
-        'category' => ['VM\MinuteMaker\Models\StructureCategory']
+        'category' => ['VM\MinuteMaker\Models\StructureCategory', 'key' => 'category_id']
 
     ];
     public $belongsToMany = [
@@ -51,7 +52,17 @@ class Projet extends Model
         //Notify member + leader + Category Watchers
         return true;
     }
-
+    public function getParent(){ //return a container or category
+        return true;
+    }
+    public function getParentLink(){ //return parent container/category complete URL
+        return true;
+    }
+    public function getNotifyEmails(){ //return an array with all email to notify
+        // if leader and team not set get parent catgory/container notifiable user
+        // Add parent admin to notfy list (Rouges de la branche + Violet ?)
+        return true;
+    }
 
 
 }
