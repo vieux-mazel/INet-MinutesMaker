@@ -6,7 +6,7 @@
                 <div class="col-md-10">
                     <h1>Gestion semestrielle
                         <small>
-                            <br class="date">{{semestre.start.formatLocalized('%B %Y')}} à {{semestre.end.formatLocalized('%B %Y')}} </small>
+                            <br class="date">{{ semestre.start.formatLocalized('%B %Y')|replace({'January':'Janvier','July':'Juillet','August':'Août','December':'Décembre'}) }} à {{semestre.end.formatLocalized('%B %Y')|replace({'January':'Janvier','July':'Juillet','August':'Août','December':'Décembre'}) }} </small>
                     </h1>
                     <p>{{cat.name}}</p>
                 </div>
@@ -18,9 +18,6 @@
                         <ul class="dropdown-menu" role="menu" id="dropdown">
                             <li>
                                 <a href="#"><i class="fa fa-plus fa-fw"></i>Seance</a>
-                            </li>
-                            <li>
-                                <a href="#"><i class="fa fa-plus fa-fw"></i>Tâche</a>
                             </li>
                             <li>
                                 <a href="#"><i class="fa fa-edit fa-fw"></i>Team</a>
@@ -41,13 +38,15 @@
         </div>
         <ul class="pager">
             <li class="previous">
-                <button data-request='{{__SELF__}}::onPreviousSemestre' data-request-update="'{{__SELF__}}::default':'#semester_header'">← Semestre précédent</a>
+                <a href="#" data-request-data='gap: {{gap}}' data-request='{{__SELF__}}::onPreviousSemestre' data-request-update="'{{__SELF__}}::default':'#semester_header'">← Semestre précédent</a>
             </li>
             <li class="next">
-                <button data-request="{{__SELF__}}::onNextSemstre" data-request-update="'{{__SELF__}}::default':'#semester_header'">Semestre prochain →</a>
+                <a href="#" data-request-data='gap: {{gap}}' data-request='{{__SELF__}}::onNextSemestre' data-request-update="'{{__SELF__}}::default':'#semester_header'">Semestre prochain →</a>
             </li>
         </ul>
+
         <div class="row">
+            {%partial __SELF__ ~ '::form_seance' cat=cat %}
         <br>
             <div class="col-md-4">
                 <div class="panel panel-info">
@@ -56,26 +55,16 @@
                             <i class="fa fa-star fa-fw"></i>Les prochaines séances de maîtrise</h3>
                     </div>
                     <div class="panel-body">
-                        <ul class="list-group">
-                            <li class="list-group-item">Cras justo odio
-                                <span class="badge">12 Oct</span>
+                        <ul class="list-group" id="seance_list">
+                            {% for seance in cat.semestre_handler.seances %}
+                            <li class="list-group-item">Séance
+                                <span class="badge">{{seance.date}}</span>
                             </li>
-                            <li class="list-group-item">Dapibus ac facilisis in
-                                <span class="badge">18 Nov</span>
-                            </li>
-                            <li class="list-group-item">Morbi leo risus
-                                <span class="badge">16 Déc</span>
-                            </li>
-                            <li class="list-group-item">Porta ac consectetur ac
-                                <span class="badge">22 Déc</span>
-                            </li>
-                            <li class="list-group-item">Vestibulum at eros
-                                <span class="badge">03 Jan</span>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="panel-footer">
-                        <a class="btn btn-block btn-primary">Nouveau</a>
+                        <a data-toggle="modal" href="#form-seance" class="btn btn-block btn-primary">Nouveau</a>
                     </div>
                 </div>
             </div> <!-- Close col-md-4 -->
@@ -117,5 +106,28 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="well ">
+        <h3><i class="fa fa-angle-double-down fa-fw text-muted "></i>Buts et Objectifs du semestre</h3>
+        <ul class="lead text-left text-success">
+            <li>Planifier les stages 4 mois en avance</li>
+            <li>Au moins une séance d'information avec les parents</li>
+            <li>Un weekend PiCos durant le semestre</li>
+        </ul>
+        <h3 contenteditable="true"> <i class="fa fa-angle-double-down fa-fw text-muted "></i> Événements périodiques à venir </h3>
+        <ul class="list-group">
+            <li class="list-group-item">Passage 1234
+                <span class="badge">Septembre</span>
+            </li>
+            <li class="list-group-item">Dapibus ac facilisis in
+                <span class="badge">Janvier</span>
+            </li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
     </div>
 </div>

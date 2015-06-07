@@ -39,7 +39,8 @@ class Seance extends Model
     ];
     public $belongsTo = [
         'category' => ['VM\MinuteMaker\Models\StructureCategory'], //relation witrh StructureCategory~Seance => category_id in db
-        'project' => ['VM\MinuteMaker\Models\Project']
+        'project' => ['VM\MinuteMaker\Models\Project'],
+        'semestre_handler' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'semestre_id']
     ];
     public $belongsToMany = [];
     public $morphTo = [];

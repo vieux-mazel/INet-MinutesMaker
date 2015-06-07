@@ -1,0 +1,46 @@
+
+<div id="form-seance" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3>Ajouter une séance </h3>
+            </div>
+            <div class="modal-body">
+                {{ form_ajax('onAddSeance', { class: 'add_seance', update:{ 'StructureCategory::default':'#semester_header'}, success: "$('#form-seance').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();" }) }}
+                    <div class="form-group">
+                        <label for="registerDescription">Description</label>
+                        <textarea type="textarea" class="form-control" name='description' placeholder="{{cat.description}}" name="description" {% if not financialData%} disabled {% endif %}></textarea>
+                    </div>
+                    <div class="input-group date">
+                        <label for="registerDate">Date de la séance</label>
+                        <input type="text" class="form-control" name='date' id="datepicker"><span class="input-group-addon" ><i class="fa fa-calendar"></i></span>
+                    </div>
+                    <input type='hidden' name='cat_id' value='{{cat.id}}'>
+
+            </div>
+            <div class="modal-footer">
+                <input class="btn btn-success" type="submit" value="Créer" id="submit">
+                <a href="#" class="btn" data-dismiss="modal">Fermer</a>
+                {{ form_close() }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datepicker').datepicker({
+            format: "dd/mm/yyyy",
+            calendarWeeks: true,
+            todayHighlight: true
+        });
+    });
+
+
+</script>
+<style>
+.datepicker{z-index:1151 !important;}
+</style>

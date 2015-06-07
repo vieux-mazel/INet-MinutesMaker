@@ -45,6 +45,11 @@ class StructureCategory extends ComponentBase
     }
     public function onRun(){
         $this->prepareVars();
+        $this->loadJsAndCss();
+    }
+    public function loadJsAndCss(){
+        $this->addJs('/plugins/vm/minutemaker/components/inc/js/datepicker.js');
+        $this->addCss('/plugins/vm/minutemaker/components/inc/css/datepicker.css');
     }
 
     public function prepareVars(){
@@ -76,17 +81,15 @@ class StructureCategory extends ComponentBase
      * -------------------
      */
      public function onPreviousSemestre(){
-         $this->gap--;
-         #$this->current_sh_projet = $this->page['current_sh_projet'] = $this->cat->createOrGetActiveSemestre($this->gap);
+         $this->gap = post('gap')-1;
          $this->prepareVars();
-         return ['#semester_header' => $this->renderPartial('::semesterheader')];
-         // $this->current_sh_projet = $this->cat->createOrGetActiveSemestre($this->gap);
-         #return $this->renderPartial('::default');
+     }
+     public function onNextSemestre(){
+         $this->gap = post('gap')+1;
+         $this->prepareVars();
      }
      public function updateDefault()
      {
-         //$this->prepareVars();
-         $this->gap = $this->gap - 1;
          $this->prepareVars();
          return ['#semester_header' => $this->renderPartial('::semesterheader')];
 
@@ -95,6 +98,22 @@ class StructureCategory extends ComponentBase
          #return $this->renderPartial('::default');
          #return $this->renderPartial('::default');
          #    public function updateDefault()
+     }
+     public function onAddSeance(){
+         $cat_id = post('cat_id');
+         $cat = Cat::find($cat_id);
+         $seance = New Seance;
+         if(is_null($cat->semestre_handler)){
+             $seance->category = $cat;
+         } else{
+             $seance->semestre_handler = $cat->semestre_handler;
+         }
+         $format = 'd/m/Y';
+         $date = \DateTime::createFromFormat($format,post('date'));
+         $seance->date = $date;
+         $seance->name = 'Séance du ' . $date->format('d/m/Y');
+         $seance->save();
+         $this->prepareVars();
      }
 
 }

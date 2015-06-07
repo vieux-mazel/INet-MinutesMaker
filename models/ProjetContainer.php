@@ -28,7 +28,7 @@ class ProjetContainer extends Model
      */
     public $hasMany = [
         'projets' => ['VM\MinuteMaker\Models\Projet', 'key' => 'container_id'],
-        'seances' => ['VM\MinuteMaker\Models\Seance']
+        'seances' => ['VM\MinuteMaker\Models\Seance', 'key' => 'semestre_id']
     ];
     public $belongsToMany = [];
     public $belongsTo = [

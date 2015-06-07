@@ -67,12 +67,12 @@ class StructureCategory extends Model
 
         while ($i <= abs($gap)) {
             $i++;
-            if($today->format("n") >= 9){
-                while($today->format('n') >= 9){
+            if($today->format("n") >= 8){
+                while($today->format('n') >= 8){
                     $today->modify($sign.' month');
                 }
             }else{ // n < 9
-                while($today->format('n') < 9){
+                while($today->format('n') < 8){
                     $today->modify($sign.' month');
                 }
             }
@@ -81,17 +81,23 @@ class StructureCategory extends Model
         if(!is_null($this->semestre_handler->projets())){
             foreach ($this->semestre_handler->projets()->get() as $semestre){
                 if($today_formated >= $semestre->start->format("Y-m-d") && $today_formated <= $semestre->end->format("Y-m-d")){
+                    if($gap = 0){
+                        $semestre->is_active=true;
+                    }
                     return $semestre;
                 }
             }
         } // si pas de return => pas de semestre pour la date actuelle alors créer :
 
         $semestre = new Projet();
+        if($gap = 0){
+            $semestre->is_active=true;
+        }
         $year = $today->format('Y');
         $month = $today->format('m');
 
 
-        if($today->format("n") >= 9){ //créer un semestre de Septembre à Décembre
+        if($today->format("n") >= 8){ //créer un semestre de Septembre à Décembre
             $start = $year . '-08-01';
             $end = $year . '-12-' . cal_days_in_month(CAL_GREGORIAN, 12, $year); //dernier jour de décembre
         } else { //créer un semestre de Janvier à Août (limit @Juillet)
@@ -103,6 +109,7 @@ class StructureCategory extends Model
         $semestre->container = $this->semestre_handler;
         $semestre->save();
         $this->save();
+        return $semestre;
         #if(!is_null())
 
 

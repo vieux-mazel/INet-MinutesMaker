@@ -5,36 +5,7 @@
 <div class="section" id="default_container">
     <div class="container">
         <div id="semester_header">
-            {%partial __SELF__ ~ '::semesterheader' __SELF__=__SELF__ semestre=semestre gap=gap ns=ns cat=cat %}
-        </div>
-        <div class="row">
-            <div class="well ">
-                <h3><i class="fa fa-angle-double-down fa-fw text-muted "></i>Buts et Objectifs du semestre</h3>
-                <ul class="lead text-left text-success">
-                    <li>Planifier les stages 4 mois en avance</li>
-                    <li>Au moins une séance d'information avec les parents</li>
-                    <li>Un weekend PiCos durant le semestre</li>
-                </ul>
-                <h3 contenteditable="true"> <i class="fa fa-angle-double-down fa-fw text-muted "></i> Événements périodiques à venir </h3>
-                <ul class="list-group">
-                    <li class="list-group-item">Passage 1234
-                        <span class="badge">Septembre</span>
-                    </li>
-                    <li class="list-group-item">Dapibus ac facilisis in
-                        <span class="badge">Janvier</span>
-                    </li>
-                    <li class="list-group-item">Morbi leo risus</li>
-                    <li class="list-group-item">Porta ac consectetur ac</li>
-                    <li class="list-group-item">Vestibulum at eros</li>
-                </ul>
-            </div>
+            {%partial __SELF__ ~ '::semesterheader' semestre=__SELF__.current_sh_projet gap=gap ns=ns cat=cat %}
         </div>
     </div>
 </div>
-
-{{this.param.ns}}{{this.param.cat}}
-{{dump()}}
-{{dump(ns.url)}}
-{{dump(this.param)}}
-{{gap}}
-{{this.gap}}
