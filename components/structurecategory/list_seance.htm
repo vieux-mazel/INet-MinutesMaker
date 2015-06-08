@@ -1,0 +1,18 @@
+{% for seance in semestre.seances %}
+    <a href='?seance_id={{seance.slug}}'><li class="list-group-item">Séance du {{seance.date|date('d M Y')}}
+        <span class="label label-as-badge pull-right
+            {% if seance.status == 'new' %}
+                 label-danger"> new
+            {% elseif seance.status == 'ojok' %}
+                label-warning">  OJ fait
+            {% elseif seance.status == 'pvok' %}
+                label-default"> PV à envoyer
+            {% elseif seance.status == 'done' %}
+                label-success"> Terminée
+            {%endif%}
+        </span>
+        {% if seance.date == today() %}
+            Overdue
+        {% endif %}
+    </li></a>
+{% endfor %}

@@ -1,0 +1,82 @@
+{% if seance.projet %}
+    {% set parent = seance.projet %}
+        {% if parent.container %}
+            {% set category=parent.container.category%}
+        {% else %}
+            {% set category=parent.category %}
+        {% endif %}
+{%else%}
+    {% set category = seance.category %}
+{% endif %}
+{% set ns = category.structure %}
+
+
+<div id="seance_container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Séance de {{ns.name}} {{category.name}} &nbsp;
+                    <small> {{seance.date|date('l d F Y')}}</small>
+                </h1>
+                <ul class="breadcrumb">
+                    <li> <a href="/inet/{{ns.slug}}">{{ns.name}}</a></li>
+                    <li><a href="/inet/{{ns.slug}}/{{category.slug}}">{{category.name}}</a></li>
+                    <li class="active">{{seance.date|date('d-m-Y')}}</li>
+                </ul>
+            </div>
+            <div class="col-md-12">
+                <div class="well well-lg">
+                    <h2>
+                        <i class="fa fa-star fa-fw"></i>Ordre du jour
+                        <span class="pull-right">
+                            <a class="btn btn-success" data-request='{{__SELF__}}::onSendOj'><i class="fa fa-fw fa-location-arrow"></i>Envoyer l'OJ</a>
+                            <a class="btn btn-primary"><i class="fa fa-fw fa-location-arrow"></i>Envoyer le PV</a>
+                        </span>
+                    </h2>
+                    <div id='point_list'>
+                        {% partial __SELF__~'::seance_oj' seance=seance %}
+                    </div>
+                    {% partial __SELF__~'::add_point' seance=seance%}
+                    <h5 class="text-left">Rapporteur : Wapiti - George Pascal</h5>
+                    <h5 class="text-left text-muted">Présents : Wapiti - Georoge Pascal; Télé - Caf Top; George Lucas; John Lennon</h5>
+                    <div class="btn-group pull-right">
+                        <a href="#" class="btn btn-warning">Résumé</a>
+                        <a href="#" class="btn btn-primary">Voir tout</a>
+                        <a href="#" class="btn btn-danger">Signaler une erreur</a>
+                    </div>
+                    <h5 class="text-left text-muted">Excusés : Patrick Bruel, Indiana Jones</h5>
+                </div>
+            </div>
+                <hr>
+                <div id="point_container">
+                    {% for point in seance.points %}
+                        {% partial __SELF__~'::seance_point' point=point %}
+                    {% endfor %}
+                    <script>
+                    $(document).ready(function() {
+                        $('.pvpoint_form').hide();
+                        $('.edit_button').click(function(){
+                            var target = $(this).data("target");
+                            $("#container_"+target).hide();
+                            $("#edit_button_"+target).fadeOut();
+                            $("#editor_"+target).fadeIn();
+                            tinymce.EditorManager.execCommand('mceAddEditor',true, 'pv_'+target);
+                        });
+                    });
+
+                    $(document).ready(function(){
+                        $('.submit_pv').click(function(){
+                            var target = $(this).data("target");
+                            $("#container_"+target).fadeIn();
+                            $("#edit_button_"+target).fadeIn();
+                            $("#editor_"+target).hide();
+                        });
+                    });
+
+                    </script>
+
+                </div>
+
+            </div>
+      </div>
+</div>

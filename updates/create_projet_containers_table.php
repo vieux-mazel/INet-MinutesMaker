@@ -15,7 +15,7 @@ class CreateProjetContainersTable extends Migration
             $table->string('name'); // Childs projects will inherit this property
             $table->string('description'); // Childs projects will inherit this property
             $table->dateTime('last_used'); //touch everytimes a new project/seance is added to a project
-            $table->integer('ns_id')->unsigned()->index(); // Namespace is the highest group
+            $table->integer('structure_id')->unsigned()->index(); // Namespace is the highest group
             $table->integer('category_id')->unsigned()->index(); //
             #$table->integer('active_projet_id')->unsigned()->index(); // set active projet or semester
 

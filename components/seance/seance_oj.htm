@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-md-6">
+        <ul class="list-group">
+            {% for point in seance.points %}
+                {% if loop.index0 < loop.length/2 %}
+                <li class="list-group-item"><a href="#{{point.href}}"> #{{loop.index}} {{point.name}} </a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <ul class="list-group">
+            {% for point in seance.points %}
+                {% if loop.index0 >= loop.length/2 %}
+                    <li class="list-group-item"><a href="#{{point.href}}"> #{{loop.index}} {{point.name}} </a></li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+</div>

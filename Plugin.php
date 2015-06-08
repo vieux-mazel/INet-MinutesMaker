@@ -50,6 +50,16 @@ class Plugin extends PluginBase
             ]
         ];
    }
+
+   public function registerMarkupTags()
+    {
+        return [
+            'functions' => [
+                // Using an inline closure
+                'today' => function() { return new \DateTime(); }
+            ]
+        ];
+    }
    public function registerComponents()
    {
        return[

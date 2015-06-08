@@ -6,26 +6,30 @@
                 <a class="close" data-dismiss="modal">×</a>
                 <h3>Ajouter une séance </h3>
             </div>
-            <div class="modal-body">
-                {{ form_ajax('onAddSeance', { class: 'add_seance', update:{ 'StructureCategory::default':'#semester_header'}, success: "$('#form-seance').modal('hide');
-$('body').removeClass('modal-open');
-$('.modal-backdrop').remove();" }) }}
-                    <div class="form-group">
-                        <label for="registerDescription">Description</label>
-                        <textarea type="textarea" class="form-control" name='description' placeholder="{{cat.description}}" name="description" {% if not financialData%} disabled {% endif %}></textarea>
-                    </div>
-                    <div class="input-group date">
-                        <label for="registerDate">Date de la séance</label>
-                        <input type="text" class="form-control" name='date' id="datepicker"><span class="input-group-addon" ><i class="fa fa-calendar"></i></span>
-                    </div>
-                    <input type='hidden' name='cat_id' value='{{cat.id}}'>
+            <form
+            data-request="{{__SELF__}}::onAddSeance"
+            data-request-success="$('#form-seance').modal('hide');$('body').removeClass('modal-open');$('.modal-backdrop').remove();"
+            data-request-update="'{{__SELF__}}::list_seance':'#seance_list'"
+            data-request-data='gap: {{gap}}'>
+                <div class="modal-body">
 
-            </div>
-            <div class="modal-footer">
-                <input class="btn btn-success" type="submit" value="Créer" id="submit">
-                <a href="#" class="btn" data-dismiss="modal">Fermer</a>
-                {{ form_close() }}
-            </div>
+                        <div class="form-group">
+                            <label for="registerDescription">Description</label>
+                            <textarea type="textarea" class="form-control" name='description' placeholder="{{cat.description}}" name="description" {% if not financialData%} disabled {% endif %}></textarea>
+                        </div>
+                        <div class="input-group date">
+                            <label for="registerDate">Date de la séance</label>
+                            <input type="text" class="form-control" name='date' id="datepicker"><span class="input-group-addon" ><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <input type='hidden' name='cat_id' value='{{cat.id}}'>
+
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-success" type="submit" value="Créer" id="submit">
+                    <a href="#" class="btn" data-dismiss="modal">Fermer</a>
+
+                </div>
+            </form>
         </div>
     </div>
 </div>

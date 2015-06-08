@@ -15,14 +15,15 @@ class CreateSeancesTable extends Migration
             $table->timestamps();
 
             $table->dateTime('date');
-            $table->string('slug')->index();
-            
+            $table->string('slug')->index()->unique();
+
             $table->string('name');
 
             $table->integer('category_id')->unsigned()->index(); // BelongsTo one Category OR
-            $table->integer('project_id')->unsigned()->index(); // BelongsTo one project
+            $table->integer('projet_id')->unsigned()->index(); // BelongsTo one project
             $table->integer('semestre_id')->unsigned()->index(); // BelongsTo one project
             $table->integer('order')->unsigned();
+            $table->enum('status', ['new', 'ojok', 'pvok', 'done'])->default('new');
 
         });
     }

@@ -1,0 +1,13 @@
+<form
+    data-request="{{__SELF__}}::onAddPoint"
+    data-request-success="$('#ojpoint_input').val('').focus();"
+    data-request-update="'{{__SELF__}}::seance':'#seance_container'"
+    data-request-data="seance_id:{{seance.id}}"
+>
+    <div class="input-group">
+        <input type="text" id="ojpoint_input" class="form-control" value="" name="pointName" placeholder="Ajouter un point à l'ordre du jour">
+        <span class="input-group-btn">
+            <button type="submit" class="btn btn btn-success">+</button>
+        </span>
+    </div>
+</form>

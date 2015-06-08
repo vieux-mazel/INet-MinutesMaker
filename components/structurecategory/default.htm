@@ -2,10 +2,18 @@
 {% set cat = __SELF__.cat %}
 {% set semestre = __SELF__.current_sh_projet %}
 {% set gap = __SELF__.gap %}
+{% set seance = __SELF__.seance %}
+{% set header_message = __SELF__.header_message %}
 <div class="section" id="default_container">
     <div class="container">
         <div id="semester_header">
-            {%partial __SELF__ ~ '::semesterheader' semestre=__SELF__.current_sh_projet gap=gap ns=ns cat=cat %}
+            {% if seance %}
+                {% partial 'seance::seance' seance=seance %}
+            {% else %}
+                {%partial __SELF__ ~ '::semesterheader' semestre=__SELF__.current_sh_projet gap=gap ns=ns cat=cat header_message=header_message %}
+                {% partial __SELF__ ~'::semestre_infos' semestre=__SELF__.current_sh_projet gap=gap ns=ns cat=cat %}
+            {% endif %}
         </div>
+
     </div>
 </div>

@@ -1,0 +1,46 @@
+<div class="col-md-12 text-justify">
+    <h3 id="{{point.href}}">{{point.name}}
+        {% if point.status == 'reported' %}
+            <small>A voir à la
+                <a href="#">Rouge du 12 Avril</a>
+            </small>
+            <span class="label label-warning label-sm">Repporté</span>
+        {% elseif point.status == 'talkagain' %}
+            <small contenteditable="true">Faire le point à la
+                  <a href="#">Runion du 12 Mai&nbsp;</a>
+            </small>
+            <span class="label label-primary">A rediscuter</span>
+            <span class="pull-right">
+                <a class="btn btn-primary edit_button" id="edit_button_{{point.href}}" data-target="{{point.href}}"><i class="fa fa-fw fa-edit"></i>Editer</a>
+                <a class="btn btn-success"><i class="-circle fa fa-fw fa-lg -square -circle fa-unlink"></i>Lier</a>
+            </span>
+        {% else %}
+            <span class="pull-right">
+                <a class="btn btn-primary edit_button" id="edit_button_{{point.href}}" data-target="{{point.href}}"><i class="fa fa-fw fa-edit"></i>Editer</a>
+                <a class="btn btn-success"><i class="-circle fa fa-fw fa-lg -square -circle fa-unlink"></i>Lier</a>
+            </span>
+        {% endif %}
+    </h3>
+</div>
+<div class="col-md-10 col-md-offset-1 text-justify">
+    <div id="container_{{point.href}}">
+    {% if point.pv %}
+        <p class="text-justify">{{point.pv|raw}}</p>
+    {% else %}
+        <p class="text-justify text-muted"> Le procès verbal de ce point n'est pas encore écrit -- Appuyez sur "Editer" pour commencer à l'écrire</p>
+    {% endif %}
+    </div>
+    <div class="pvpoint_form" id="editor_{{point.href}}">
+    <form
+        method="post"
+        onsubmit="$(document.getElementById('container_{{point.href}}').innerHTML = document.getElementById('pv_{{point.href}}_ifr').contentWindow.document.getElementById('tinymce').innerHTML);"
+        data-request="{{__SELF__}}::onEditPoint"
+        data-request-data="point_href:'{{point.href}}'">
+        <textarea id="pv_{{point.href}}" name="pv_{{point.href}}"> {{point.pv}} </textarea>
+        <button type="submit" name="pv" data-target="{{point.href}}" class="btn btn btn-success submit_pv">Save</button>
+        <button type="button" onclick="tinymce.EditorManager.execCommand('mceRemoveEditor',true, 'pv_{{point.href}}');" data-target="{{point.href}}" class="btn btn btn-danger submit_pv pull-right">Close</button>
+    </form>
+</div>
+</div>
+
+<div class="col-md-12 text-justify"> <hr> </div>

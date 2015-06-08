@@ -2,7 +2,7 @@
 <ul>
     {% for category in ns.categories %}
         <li>
-            <a href="./{{category.slug}}/"> {{category.name}}</a>
+            <a href="/inet/{{ns.slug}}/{{category.slug}}/"> {{category.name}}</a>
         </li>
     {% endfor %}
 </ul>

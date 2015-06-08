@@ -22,7 +22,7 @@ class CreatePointsTable extends Migration
 
             $table->boolean('has_warning')->default(false);
             $table->text('warning_text')->nullable();
-
+            $table->string('href')->unique();
             // Automatic fields for discussion tracking
             $table->string('slug')->index()->unique();
             $table->integer('first_id')->unsigned()->index()->nullable();
@@ -31,7 +31,7 @@ class CreatePointsTable extends Migration
 
             $table->timestamps();
             // Automatic set depend on link
-            $table->enum('status', ['new', 'done', 'dismiss', 'reported'])->default('new');
+            $table->enum('status', ['new', 'done', 'talkagain', 'reported'])->default('new');
 
 
 

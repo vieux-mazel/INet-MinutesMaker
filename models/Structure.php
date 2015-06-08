@@ -42,7 +42,8 @@ class Structure extends Model
 
     public $hasMany = [
         'categories' => ['VM\MinuteMaker\Models\StructureCategory'],
-        'projets_containers' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'ns_id']
+        'projets_containers' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'ns_id'],
+        #'projets' => ['VM\MinuteMaker\Models\Projet', 'key' => 'structure_id'], 
     ];
 
     public function getCat(){

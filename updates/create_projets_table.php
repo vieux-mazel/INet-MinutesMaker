@@ -16,7 +16,9 @@ class CreateProjetsTable extends Migration
             $table->dateTime('date');
             $table->dateTime('start');
             $table->dateTime('end');
-
+            $table->string('name');
+            $table->string('description');
+            
             $table->integer('container_id')->unsigned()->index()->nullable(); //Define the project leader
             $table->integer('leader_id')->unsigned()->index()->nullable(); //Define the project leader
             $table->integer('bilan_id')->unsigned()->index()->nullable(); //Define the attached bilan

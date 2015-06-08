@@ -3,6 +3,10 @@
 use Model;
 use VM\MinuteMaker\Models\Point as Point;
 use VM\MinuteMaker\Models\StructureCategory as StructureCategory;
+use VM\MinuteMaker\Models\Projet as Projet;
+use VM\MinuteMaker\Models\ProjetContainer as ProjetContainer;
+use Illuminate\Support\Str;
+use VM\MinuteMaker\Models\Seance as Seances;
 /**
  * seance Model
  */
@@ -39,8 +43,8 @@ class Seance extends Model
     ];
     public $belongsTo = [
         'category' => ['VM\MinuteMaker\Models\StructureCategory'], //relation witrh StructureCategory~Seance => category_id in db
-        'project' => ['VM\MinuteMaker\Models\Project'],
-        'semestre_handler' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'semestre_id']
+        'projet' => ['VM\MinuteMaker\Models\Projet'],
+         #'semestre_handler' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'semestre_id']
     ];
     public $belongsToMany = [];
     public $morphTo = [];
@@ -61,6 +65,39 @@ class Seance extends Model
         //Notify Category watchers + Category Nofifier
         return true;
     }
+    public function beforeCreate()
+    {
+        // Generate a URL slug for this model
+        $this->slug = Str::slug($this->date->format('Y-m-d'));
+    }
+
+    public function getParent(){
+        if(!$this->category_id == 0){
+            return $this->category;
+        } elseif (!$this->projet_id == 0){
+            return $this->projet;
+        } else{
+            return $this->semestre_handler;
+        }
+    }
+    public function getParentBySlug($slug){
+        if(!$this->category_id == 0 ){
+            return StructureCategory::whereSlug($slug)->first();
+        } elseif (!$this->projet_id == 0){
+            return $this->projet;
+        } else{
+            return ProjetContainer::whereSlug($slug)->first();
+        }
+    }
+    public function getParentType(){
+        if(!$this->category_id == 0 ){
+            return 'category';
+        } elseif (!$this->projet_id == 0){
+            return 'projet';
+        } else{
+            return 'semestre';
+        }
+    }
     /**
      * SCOP FUNCTION
      */
@@ -69,10 +106,12 @@ class Seance extends Model
       * Fetch Seance with two slug Seance::Slug($slug,$catSlug);
       * @param Query $query   Automatic
       * @param string $slug   Seance slug
-      * @param string $catSlug Category slug
+      * @param string $catSlug parent Slug (projet, category or ProjetContainer)
       * @return query
       */
-     public function scopeSlug($query, $slug, $catSlug){
+     public function scopeBySlug($query, $slug, $catSlug){
+         #$parent = $this->getParentBySlug($parentSlug);
+         #return $query->where($this->getParentType() .'_id' == $parent->id)->whereSlug($slug);
          $cat = StructureCategory::whereSlug($catSlug)->first();
          return $query->where('category' == $cat)->whereSlug($slug);
      }

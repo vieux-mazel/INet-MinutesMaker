@@ -45,19 +45,21 @@ class Point extends Model
 
     public function beforeCreate(){
         // Generate slug if it's a parent's tracked point
+        $this->href = uniqid();
         if($this->is_tracked){
             if(!$this->first_id){
-                $slug_str = 'discussion_'.
-                if($this->seance->category->title){
-                    $slug_str . $this->seance->category->title;
+                $slug_str = 'discussion_';
+                if($this->seance->category->name){
+                    $slug_str . $this->seance->category->name;
                 }
                 $sluf_str . date("Ymd_hi_") . Str::random(4); //add time stamp + random char to slug
                 $this->slug = Str::slug($sluf_str); //set slug
             }
         // If none set slug to null
         }else{
-            $this->slug = NULL;
+            $this->slug = $this->href;
         }
+
     }
     /**
      * Move order to +1

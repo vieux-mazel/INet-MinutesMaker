@@ -29,7 +29,7 @@ class Projet extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'seance' => ['VM\MinuteMaker\Models\Seance']
+        'seances' => ['VM\MinuteMaker\Models\Seance', 'order' => 'date desc']
     ];
     public $belongsTo = [
         'container' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'container_id'],
