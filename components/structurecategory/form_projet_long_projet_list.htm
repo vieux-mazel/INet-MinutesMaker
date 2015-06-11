@@ -1,0 +1,4 @@
+<option id="optionNONE" name="handler_id" value="null"> Non - Aucun </option>
+{% for long_projet in cat.projets_handlers %}
+<option name="handler_id" value="{{long_projet.id}}"> {{long_projet.name}} </option>
+{% endfor %}

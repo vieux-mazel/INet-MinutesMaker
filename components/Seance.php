@@ -47,11 +47,9 @@ class Seance extends ComponentBase
     }
     public function onSendOj(){
         // Send to multiple addresses
-        $params = [
-            'seance' => $this->page['seance'],
-            'ns' => $this->page['ns'],
-            'category' => $this->page['category']
-        ];
+
+        
+        $params = ['seance' => post('seance'), 'ns' => post('ns'), 'category' => post('category')];
         Mail::send('vm.minutemaker::mail.oj', $params, function($message) {
                 $message->to('robin.fave@gmail.com', 'Robin Fave');
             });

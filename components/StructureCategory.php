@@ -50,7 +50,7 @@ class StructureCategory extends ComponentBase
     }
     public function loadJsAndCss(){
         $this->addJs('/plugins/vm/minutemaker/components/inc/js/datepicker.js');
-        $this->addJs('/plugins/vm/minutemaker/components/inc/js/tinymce/tinymce.min.js'); 
+        $this->addJs('/plugins/vm/minutemaker/components/inc/js/tinymce/tinymce.min.js');
         $this->addJs('/plugins/vm/minutemaker/components/inc/js/register_tinymce.js');
         $this->addCss('/plugins/vm/minutemaker/components/inc/css/datepicker.css');
         $this->addCss('/plugins/vm/minutemaker/components/inc/css/default.css');
@@ -108,21 +108,53 @@ class StructureCategory extends ComponentBase
          #    public function updateDefault()
      }
      public function onAddSeance(){
+         $seance_dates = explode(',', post('date'));
          $this->gap = post('gap');
          $cat_id = post('cat_id');
          $cat = Cat::find($cat_id);
-         $seance = New Seance;
-         if(is_null($cat->semestre_handler)){
-             $seance->category = $cat;
-         } else{
-             $seance->projet = $cat->createOrGetActiveSemestre($this->gap);
+         foreach ($seance_dates as $seance_date) {
+             $seance = New Seance;
+             if(is_null($cat->semestre_handler)){
+                 $seance->category = $cat;
+             } else{
+                 $seance->projet = $cat->createOrGetActiveSemestre($this->gap);
+             }
+             $format = 'd/m/Y';
+             $date = \DateTime::createFromFormat($format,$seance_date);
+             $seance->date = $date;
+             $seance->name = 'Séance du ' . $date->format('d/m/Y');
+             $seance->save();
          }
-         $format = 'd/m/Y';
-         $date = \DateTime::createFromFormat($format,post('date'));
-         $seance->date = $date;
-         $seance->name = 'Séance du ' . $date->format('d/m/Y');
-         $seance->save();
          $this->prepareVars();
+
+     }
+     public function onAddProjetHandler(){
+         $this->gap = post('gap');
+         $cat_id = post('cat_id');
+         $cat = Cat::find($cat_id);
+
+         $handler = new ProjetContainer;
+         $handler->name = post('name');
+         $handler->description = post('description');
+         $handler->category_handled = $cat;
+         $handler->save();
+         $this->cat = $this->page['cat'] = Cat::find($cat_id);
+         $this->prepareVars();
+
+     }
+     public function onAddProjet(){
+         $this->gap = post('gap');
+         $cat_id = post('cat_id');
+         $cat = Cat::find($cat_id);
+
+         $projet = new Projet;
+         $projet->description = post('description');
+         $projet->name = post('name');
+         $seance_dates = explode(',', post('date')); //handle multi date form not used here
+         $format = 'd/m/Y';
+         $date = \DateTime::createFromFormat($format,$seance_date);
+         $projet_handled = 0;
+         // check if projet handler is checked and assign projet to handler (ProjetContainer)
      }
 
 }

@@ -9,6 +9,7 @@
 
 <div class="row">
     {%partial __SELF__ ~ '::form_seance' semestre=semestre gap=gap %}
+    {%partial __SELF__ ~ '::form_projet' cat=cat gap=gap %}
 <br>
     <div class="col-md-4">
         <div class="panel panel-info">
@@ -42,7 +43,7 @@
                 </ul>
             </div>
             <div class="panel-footer">
-                <a class="btn btn-block btn-primary">Nouveau</a>
+                <a data-toggle="modal" href="#form-projet" class="btn btn-block btn-primary">Nouveau</a>
             </div>
         </div>
     </div>

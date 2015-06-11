@@ -32,6 +32,7 @@ class ProjetContainer extends Model
     ];
     public $belongsToMany = [];
     public $belongsTo = [
+        'category_handled' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'handled_cat_id'], // Used for longtime project
         #'structure' => ['VM\MinuteMaker\Models\Structure'],
         'category' => ['VM\MinuteMaker\Models\StructureCategory', 'key' => 'category_id'],
         #'active_projet' => ['VM\MinuteMaker\Models\Projet'],

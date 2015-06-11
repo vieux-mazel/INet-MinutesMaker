@@ -17,6 +17,7 @@ class CreateProjetContainersTable extends Migration
             $table->dateTime('last_used'); //touch everytimes a new project/seance is added to a project
             $table->integer('structure_id')->unsigned()->index(); // Namespace is the highest group
             $table->integer('category_id')->unsigned()->index(); //
+            $table->integer('handled_cat_id')->unsigned()->index(); 
             #$table->integer('active_projet_id')->unsigned()->index(); // set active projet or semester
 
             $table->timestamps();

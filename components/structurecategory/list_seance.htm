@@ -1,5 +1,5 @@
 {% for seance in semestre.seances %}
-    <a href='?seance_id={{seance.slug}}'><li class="list-group-item">Séance du {{seance.date|date('d M Y')}}
+        <a href='?seance_id={{seance.slug}}'> <li class="list-group-item"> Séance du {{seance.date|date('d M Y')}}
         <span class="label label-as-badge pull-right
             {% if seance.status == 'new' %}
                  label-danger"> new
@@ -14,5 +14,5 @@
         {% if seance.date == today() %}
             Overdue
         {% endif %}
-    </li></a>
+        </li></a>
 {% endfor %}

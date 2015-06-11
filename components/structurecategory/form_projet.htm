@@ -1,0 +1,112 @@
+
+<div id="form-projet" class="modal fade in" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="color:black;" data-dismiss="modal">×</button>
+                <h3>Ajouter un Projet </h3>
+            </div>
+            <form
+            data-request="{{__SELF__}}::onAddProjet"
+            data-request-success="$('#form-seance').modal('hide');$('body').removeClass('modal-open');$('.modal-backdrop').remove();"
+            data-request-update="'{{__SELF__}}::list_seance':'#seance_list'"
+            data-request-data='gap: {{gap}}'>
+                <div class="modal-body">
+                        <div class="form-group">
+                            <label for="registerDescription">Description</label>
+                            <input type="textarea" class="form-control" name='description' placeholder="Description du projet"></input>
+                            <label for="registerIsRepetitive">  Est-ce que ce projet est répétitif ? (p.ex passage 1234 ou radeaux)</label>
+                            <input id="is_repetitive" type="checkbox" class="form-control" name="is_repetitive">
+                        </div>
+                        <div class="form-group date">
+                            <label for="registerDate">Date du projet (ou date de fin)</label>
+                            <input type="text" class="form-control" name='date' id="datepicker"><span class="input-group-addon" ><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <div class="form-group" id="repetitive_input">
+                            <label for="registerLongProjet"> Est-ce que le projet est dans la liste ci-dessous ?</label>
+                            <select class="form-control" id="projet_handler_list">
+                                {% partial __SELF__~"::form_projet_long_projet_list" cat=cat %}
+                            </select>
+                            <label> Si le projet n'est pas dans la liste, clique sur nouveau </label> <a data-toggle="modal" href="#form-projet-handler" class="btn btn-success pull-right">Nouveau</a>
+                            <input type='hidden' name='cat_id' value='{{cat.id}}'> </input>
+                            <script>
+                                $('#repetitive_input *').toggle();
+                                $('#is_repetitive').click(function() {
+                                    $('#repetitive_input select').attr('disabled',(!this.checked));
+                                    $('#repetitive_input a').attr('disabled',(!this.checked));
+                                    $('#repetitive_input *').toggle();
+
+                                });
+                            </script>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-success" type="submit" value="Créer" id="submit"> </input>
+                    <a href="#" class="btn btn-danger" data-dismiss="modal">Fermer</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="form-projet-handler" class="modal fade in" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" style="color:black;" data-dismiss="modal">×</button>
+                <h3>Ajouter un Projet Répétitif </h3>
+            </div>
+            <form
+            data-request="{{__SELF__}}::onAddProjetHandler"
+            data-request-success="$('#form-projet-handler').modal('hide');$('body').removeClass('modal-open');$('.modal-backdrop').remove();"
+            data-request-update="'{{__SELF__}}::form_projet_long_projet_list':'#projet_handler_list'">
+                <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="registerDescription">Nom</label>
+                            <input type="textarea" class="form-control" name='name' placeholder="Nom du projet répétitif"></input>
+                            <label for="registerDescription">Description</label>
+                            <input type="textarea" class="form-control" name='description' placeholder="Description du projet répétitif"></input>
+                        </div>
+                        <div class="form-group">
+                            <label> Le projet sera créé dans la catégorie : </label>
+                            <input type="textarea" class="form-control" name='description' placeholder="{{cat.name}}" disabled></input>
+                            <label> Si la catégorie ci-dessus ne correspond pas à ce qui est voulu, rends-toi sur l'<a href="/inet/{{ns.slug}}">index</a> </label>
+                        </div>
+                        <br>
+                        <br>
+                        <label> Un "Projet répétitif" est une sorte de sac à projet dans lequelle on va mettre
+                        toutes les "éditions" d'un projet. Par exemple un "projet répétitif" appelé
+                        "Passage 1234" contiendrait un projet "Passage 1234 2014" et un projet "Passage 1234 2015".
+                        Les bilans des projets sont regroupés automatiquement sur la page du "projet répétitif". </label>
+                        <br>
+                        <br>
+                        <br>
+                </div>
+                <div class="modal-footer">
+                    <input type='hidden' name='cat_id' value='{{cat.id}}'> </input>
+                    <input class="btn btn-success" type="submit" value="Créer" id="submit"> </input>
+                    <a href="#" class="btn btn-danger" data-dismiss="modal">Fermer</a>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.date input').datepicker({
+            multidate: false,
+            format: "dd/mm/yyyy",
+            todayHighlight: true
+        });
+    });
+
+
+</script>
+<style>
+.datepicker{z-index:1151 !important;}
+</style>

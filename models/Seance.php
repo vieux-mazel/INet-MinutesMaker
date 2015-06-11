@@ -65,12 +65,15 @@ class Seance extends Model
         //Notify Category watchers + Category Nofifier
         return true;
     }
-    public function beforeCreate()
+    public function afterCreate()
     {
         // Generate a URL slug for this model
-        $this->slug = Str::slug($this->date->format('Y-m-d'));
+        $slug = Str::slug($this->date->format('Y-m-d'));
+        $slugCount = count(Seances::whereRaw("slug REGEXP '^{$slug}(-[0-9]+)?$' and id != '{$this->id}'")->get());
+        $slug = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+        $this->slug = $slug;
+        $this->save();
     }
-
     public function getParent(){
         if(!$this->category_id == 0){
             return $this->category;

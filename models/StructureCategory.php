@@ -34,20 +34,19 @@ class StructureCategory extends Model
      */
     public $hasOne = [
         'semestre_handler' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'category_id'],
-        'projet_handler' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'category_id'] // Used for longtime project
     ];
 
     public $hasMany = [
         //'seances' => ['VM\MinuteMaker\Models\Seance'], //relation with Seance
         'projets' => ['VM\MinuteMaker\Models\Projet', 'key' => 'category_id'],
-        'commissions' => ['VM\MinuteMaker\Models\Projet', 'key' => 'category_id']
+        'commissions' => ['VM\MinuteMaker\Models\Projet', 'key' => 'category_id'],
+        'projets_handlers' => ['VM\MinuteMaker\Models\ProjetContainer', 'key' => 'handled_cat_id'] // Used for longtime project
     ];
     public $belongsTo = [
         'structure' => ['VM\MinuteMaker\Models\Structure'] //relation with StructureCategory~Structure => structure_id in db
     ];
 
     public $belongsToMany = [
-
         'notify' => ['RainLab\User\Models\Group',
             'table' => 'vm_minutemaker_cat_notify',
             'key'      => 'category_id',
