@@ -148,12 +148,29 @@ class StructureCategory extends ComponentBase
          $cat = Cat::find($cat_id);
 
          $projet = new Projet;
-         $projet->description = post('description');
-         $projet->name = post('name');
-         $seance_dates = explode(',', post('date')); //handle multi date form not used here
+
+         //$seance_dates = explode(',', post('date')); //handle multi date form not used here
          $format = 'd/m/Y';
-         $date = \DateTime::createFromFormat($format,$seance_date);
-         $projet_handled = 0;
+         $date = \DateTime::createFromFormat($format, post('date'));
+         $projet->category = $cat;
+         $projet->start = $date;
+         $projet->end = $date;
+
+         if(post('is_repetitive')){
+             $projet_handler = ProjetContainer::find(post('handler_id'))->first();
+             $projet->container = $proje_handler;
+             $projet->name = $projet_handler->name; //overwrite projet name
+             $projet->description = $projet->description; //overwrite projet description
+         }
+         else{
+             $projet->description = post('description');
+             $projet->name = post('name');
+         }
+
+         $projet->save();
+         $this->cat = $this->page['cat'] = Cat::find($cat_id);
+         $this->prepareVars();
+
          // check if projet handler is checked and assign projet to handler (ProjetContainer)
      }
 

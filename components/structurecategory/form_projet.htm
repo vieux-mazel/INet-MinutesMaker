@@ -8,26 +8,37 @@
             </div>
             <form
             data-request="{{__SELF__}}::onAddProjet"
-            data-request-success="$('#form-seance').modal('hide');$('body').removeClass('modal-open');$('.modal-backdrop').remove();"
-            data-request-update="'{{__SELF__}}::list_seance':'#seance_list'"
+            data-request-success="$('#form-projet').modal('hide');$('body').removeClass('modal-open');$('.modal-backdrop').remove();"
+            data-request-update="'{{__SELF__}}::list_projets':'#projet_list'"
             data-request-data='gap: {{gap}}'>
                 <div class="modal-body">
                         <div class="form-group">
-                            <label for="registerDescription">Description</label>
-                            <input type="textarea" class="form-control" name='description' placeholder="Description du projet"></input>
-                            <label for="registerIsRepetitive">  Est-ce que ce projet est répétitif ? (p.ex passage 1234 ou radeaux)</label>
-                            <input id="is_repetitive" type="checkbox" class="form-control" name="is_repetitive">
+                            <div class="checkbox">
+                                <label>
+                                    <input id="is_repetitive" type="checkbox" name="is_repetitive"> Est-ce que ce projet est répétitif ? (p.ex passage 1234 ou radeaux)
+                                </label>
+                            </div>
                         </div>
+                        <div class="form-group" id="solo_descr">
+                            <label for="registerDescription">Nom du projet</label>
+                            <input type="text" class="form-control" name='name' placeholder="Nom du projet"></input>
+                            <label for="registerDescription">Description</label>
+                            <input type="text" class="form-control" name='description' placeholder="Description du projet"></input>
+                        </div>
+
                         <div class="form-group date">
                             <label for="registerDate">Date du projet (ou date de fin)</label>
-                            <input type="text" class="form-control" name='date' id="datepicker"><span class="input-group-addon" ><i class="fa fa-calendar"></i></span>
+                                <div class="input-group">
+                                <input type="text" name="date" class="form-control" id="datepicker">
+                                <div class="input-group-addon" ><i class="fa fa-calendar"></i></div>
+                            </div>
                         </div>
                         <div class="form-group" id="repetitive_input">
                             <label for="registerLongProjet"> Est-ce que le projet est dans la liste ci-dessous ?</label>
                             <select class="form-control" id="projet_handler_list">
                                 {% partial __SELF__~"::form_projet_long_projet_list" cat=cat %}
                             </select>
-                            <label> Si le projet n'est pas dans la liste, clique sur nouveau </label> <a data-toggle="modal" href="#form-projet-handler" class="btn btn-success pull-right">Nouveau</a>
+                            <label> Si le projet n'est pas dans la liste, cliques sur nouveau </label> <a data-toggle="modal" href="#form-projet-handler" class="btn btn-success pull-right">Nouveau</a>
                             <input type='hidden' name='cat_id' value='{{cat.id}}'> </input>
                             <script>
                                 $('#repetitive_input *').toggle();
@@ -35,7 +46,7 @@
                                     $('#repetitive_input select').attr('disabled',(!this.checked));
                                     $('#repetitive_input a').attr('disabled',(!this.checked));
                                     $('#repetitive_input *').toggle();
-
+                                    $('#solo_descr').toggle();
                                 });
                             </script>
                         </div>
@@ -63,7 +74,10 @@
             data-request-success="$('#form-projet-handler').modal('hide');$('body').removeClass('modal-open');$('.modal-backdrop').remove();"
             data-request-update="'{{__SELF__}}::form_projet_long_projet_list':'#projet_handler_list'">
                 <div class="modal-body">
-
+                    <blockquote> Un <i>Projet répétitif</i> est une sorte de sac à projet dans lequelle on va mettre
+                    toutes les <i>éditions</i> d'un projet. Par exemple un <i>projet répétitif</i> appelé
+                    <i>Passage 1234</i> contiendrait un projet <i>Passage 1234 2014</i> et un projet <i>Passage 1234 2015</i>.
+                    Les bilans des projets sont regroupés automatiquements sur la page du <i>projet répétitif</i>. </blockquote>
                         <div class="form-group">
                             <label for="registerDescription">Nom</label>
                             <input type="textarea" class="form-control" name='name' placeholder="Nom du projet répétitif"></input>
@@ -71,19 +85,30 @@
                             <input type="textarea" class="form-control" name='description' placeholder="Description du projet répétitif"></input>
                         </div>
                         <div class="form-group">
+                          <label for="registerPeriodicity">Le projet se répète généralement en : </label>
+                          <select type="dropdown" class="form-control" placeholder="">
+                              <option name="periodicity" value="01">En Janvier</option>
+                              <option name="periodicity" value="02">En Février</option>
+                              <option name="periodicity" value="03">En Mars</option>
+                              <option name="periodicity" value="04">En Avril</option>
+                              <option name="periodicity" value="05">En Mai</option>
+                              <option name="periodicity" value="06">En Juin</option>
+                              <option name="periodicity" value="07">En Juillet</option>
+                              <option name="periodicity" value="08">En Août</option>
+                              <option name="periodicity" value="09">En Septembre</option>
+                              <option name="periodicity" value="10">En Octobre</option>
+                              <option name="periodicity" value="11">En Novembre</option>
+                              <option name="periodicity" value="12">En Décembre</option>
+                              <option name="periodicity" value="monthly">Une fois par mois</option>
+                          </select>
+                          <p class="help-block">Help text here.</p>
+                        </div>
+                        <div class="form-group">
                             <label> Le projet sera créé dans la catégorie : </label>
                             <input type="textarea" class="form-control" name='description' placeholder="{{cat.name}}" disabled></input>
                             <label> Si la catégorie ci-dessus ne correspond pas à ce qui est voulu, rends-toi sur l'<a href="/inet/{{ns.slug}}">index</a> </label>
                         </div>
-                        <br>
-                        <br>
-                        <label> Un "Projet répétitif" est une sorte de sac à projet dans lequelle on va mettre
-                        toutes les "éditions" d'un projet. Par exemple un "projet répétitif" appelé
-                        "Passage 1234" contiendrait un projet "Passage 1234 2014" et un projet "Passage 1234 2015".
-                        Les bilans des projets sont regroupés automatiquement sur la page du "projet répétitif". </label>
-                        <br>
-                        <br>
-                        <br>
+
                 </div>
                 <div class="modal-footer">
                     <input type='hidden' name='cat_id' value='{{cat.id}}'> </input>

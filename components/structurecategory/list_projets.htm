@@ -1,0 +1,9 @@
+{% for projet in cat.projets %}
+        <a href='?projet_id={{projet.slug}}'> <li class="list-group-item"> {{projet.name}} - {{projet.end|date('d M Y')}}
+        </li></a>
+{% endfor %}
+
+{% for handler in cat.projets_handlers %}
+        <a href='?projet_id={{handler.slug}}'> <li class="list-group-item"> {{handler.name}}
+        </li></a>
+{% endfor %}
